@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Álvaro Lillo Cócera — Arquitecto Técnico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1814; --ink-mid: #3d3a35; --ink-light: #7a7570;
+    --paper: #f4f1ec; --paper-warm: #ede9e2; --rule: #c8c2b8;
+    --accent: #8b6f47; --accent-light: #d4b896; --white: #faf8f5;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; font-weight: 300; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(139,111,71,0.06) 79px, rgba(139,111,71,0.06) 80px); pointer-events: none; z-index: 0; }
+  .page { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 48px; }
+
+  /* HEADER */
+  header { padding: 72px 0 40px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px; }
+  .label-small { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 12px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 7vw, 80px); font-weight: 300; line-height: 0.92; letter-spacing: -0.01em; color: var(--ink); }
+  h1 span { display: block; font-style: italic; color: var(--accent); }
+  .header-meta { text-align: right; }
+  .header-meta p { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 300; color: var(--ink-light); line-height: 1.9; letter-spacing: 0.04em; }
+  .colegiado { display: inline-block; margin-top: 10px; border: 1px solid var(--accent-light); padding: 4px 12px; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+
+  /* SECTION */
+  .section-header { display: flex; align-items: center; gap: 20px; margin: 56px 0 32px; }
+  .section-header::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-title { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-light); white-space: nowrap; }
+  .section-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--accent-light); margin-right: 6px; }
+
+  /* ABOUT */
+  .about-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; line-height: 1.55; color: var(--ink-mid); max-width: 780px; border-left: 2px solid var(--accent-light); padding-left: 28px; }
+
+  /* SKILLS */
+  .skills-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); margin-top: 8px; }
+  .skill-cell { padding: 20px 24px; border-right: 1px solid var(--rule); }
+  .skill-cell:last-child { border-right: none; }
+  .skill-cell h3 { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .skill-cell ul { list-style: none; }
+  .skill-cell li { font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 2; display: flex; align-items: center; gap: 8px; }
+  .skill-cell li::before { content: ''; width: 4px; height: 1px; background: var(--accent-light); display: inline-block; flex-shrink: 0; }
+
+  /* SOFT */
+  .soft-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .soft-pill { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 300; letter-spacing: 0.1em; color: var(--ink-mid); border: 1px solid var(--rule); padding: 6px 16px; background: var(--white); }
+
+  /* EXP */
+  .exp-block { display: grid; grid-template-columns: 160px 1fr; gap: 0 40px; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+  .exp-block:first-of-type { border-top: 1px solid var(--rule); }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 300; color: var(--ink-light); letter-spacing: 0.08em; padding-top: 3px; line-height: 1.8; }
+  .exp-role { font-family: 'Barlow', sans-serif; font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .exp-company { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+  .exp-list { list-style: none; }
+  .exp-list li { font-size: 13.5px; font-weight: 300; color: var(--ink-mid); line-height: 1.7; margin-bottom: 6px; padding-left: 14px; position: relative; }
+  .exp-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent-light); font-size: 10px; top: 4px; }
+
+  /* EDU */
+  .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 8px; }
+  .edu-cell { background: var(--paper); padding: 24px 28px; }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: var(--accent-light); margin-bottom: 6px; display: block; }
+  .edu-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; line-height: 1.4; }
+  .edu-inst { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink-light); letter-spacing: 0.04em; }
+  .edu-note { margin-top: 6px; font-size: 12px; font-style: italic; color: var(--accent); font-family: 'Cormorant Garamond', serif; }
+
+  /* STATS */
+  .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); margin-top: 8px; }
+  .stat-item { padding: 24px; border-right: 1px solid var(--rule); text-align: center; }
+  .stat-item:last-child { border-right: none; }
+  .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1; color: var(--ink); display: block; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light); margin-top: 6px; display: block; line-height: 1.5; }
+
+  /* ─── FILTROS ─── */
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 28px; align-items: center; }
+  .filter-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light); margin-right: 4px; }
+  .filter-btn {
+    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 300;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--rule); background: var(--white);
+    color: var(--ink-mid); padding: 6px 14px; cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .filter-btn:hover { border-color: var(--accent-light); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
+
+  /* ─── PORTFOLIO TABLE ─── */
+  .portfolio-section { margin-top: 0; }
+
+  .tipo-block { margin-bottom: 8px; overflow: hidden; }
+
+  .tipo-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 0 12px; cursor: pointer; user-select: none;
+    border-top: 1px solid var(--rule);
+    transition: opacity 0.15s;
+  }
+  .tipo-header:hover { opacity: 0.75; }
+
+  .tipo-label {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 20px; font-weight: 300; color: var(--ink-mid);
+    flex: 1;
+  }
+
+  .tipo-count {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.14em; color: var(--accent-light);
+    border: 1px solid var(--accent-light); padding: 3px 9px;
+  }
+
+  .tipo-toggle {
+    font-family: 'DM Mono', monospace; font-size: 14px;
+    color: var(--accent-light); transition: transform 0.25s ease;
+    display: inline-block; line-height: 1;
+  }
+  .tipo-toggle.open { transform: rotate(45deg); }
+
+  .tipo-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tipo-body.open { max-height: 2000px; }
+
+  /* mode tabs inside tipo-block */
+  .mode-tabs { display: flex; gap: 0; margin-bottom: 0; border-bottom: 1px solid var(--rule); }
+  .mode-tab {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; padding: 8px 16px; cursor: pointer;
+    border-bottom: 2px solid transparent; color: var(--ink-light);
+    background: none; border-top: none; border-left: none; border-right: none;
+    transition: all 0.15s;
+  }
+  .mode-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .mode-tab:hover:not(.active) { color: var(--ink-mid); }
+
+  .mode-panel { display: none; }
+  .mode-panel.active { display: block; }
+
+  /* Table */
+  .portfolio-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .portfolio-table th { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+  .portfolio-table th:first-child { padding-left: 0; }
+  .portfolio-table th:last-child { text-align: right; }
+  .portfolio-table td { padding: 14px 12px; vertical-align: top; border-bottom: 1px solid rgba(200,194,184,0.4); color: var(--ink-mid); font-weight: 300; line-height: 1.5; }
+  .portfolio-table td:first-child { padding-left: 0; }
+  .portfolio-table td:last-child { text-align: right; white-space: nowrap; }
+  .portfolio-table tr:last-child td { border-bottom: none; }
+  .proj-name { font-weight: 400; color: var(--ink); font-size: 13px; line-height: 1.4; }
+  .proj-funcs { font-size: 11px; color: var(--ink-light); margin-top: 3px; font-family: 'DM Mono', monospace; letter-spacing: 0.02em; }
+  .proj-client { font-size: 12px; color: var(--ink-mid); max-width: 160px; }
+  .proj-pem { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 400; }
+  .proj-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-light); display: block; margin-top: 2px; }
+
+  /* hidden row */
+  tr.hidden-row { display: none !important; }
+
+  /* FOOTER */
+  footer { margin-top: 80px; padding: 32px 0 48px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+  .footer-name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; font-weight: 300; color: var(--ink-light); }
+  .footer-contact { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink-light); letter-spacing: 0.08em; text-align: right; line-height: 2; }
+
+  @media print {
+    body::before { display: none; }
+    .page { padding: 0 32px; }
+    header { padding-top: 32px; }
+    .filter-bar { display: none; }
+    .tipo-body { max-height: none !important; display: block !important; }
+    .mode-panel { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <span class="label-small">Portfolio — Arquitecto Técnico · COAT 7.042</span>
+      <h1>Álvaro Lillo<span>Cócera</span></h1>
+    </div>
+    <div class="header-meta">
+      <p>Benetússer, Valencia</p>
+      <p>+34 605 145 265</p>
+      <p>a.lillococera@gmail.com</p>
+      <p>linkedin.com/in/alillococera</p>
+      <span class="colegiado">N.º Colegiado COAT 7.042</span>
+    </div>
+  </header>
+
+  <div class="section-header"><span class="section-title"><span class="section-num">01</span>Perfil</span></div>
+  <p class="about-text">Arquitecto técnico con más de 3 años de experiencia en proyectos y dirección de ejecución de obras privadas y públicas. Especializado en edificación de pequeña, media y gran escala — desde fase de proyecto hasta entrega final. Perfil analítico, con facilidad para detectar desviaciones, mantener comunicación fluida con todos los agentes y adaptarse a nuevos procesos y metodologías.</p>
+
+  <div class="section-header"><span class="section-title"><span class="section-num">02</span>En cifras</span></div>
+  <div class="stats-strip">
+    <div class="stat-item"><span class="stat-number">3+</span><span class="stat-label">Años de<br>experiencia</span></div>
+    <div class="stat-item"><span class="stat-number">23</span><span class="stat-label">Proyectos<br>completados</span></div>
+    <div class="stat-item"><span class="stat-number">90M+</span><span class="stat-label">€ gestionados<br>en obra</span></div>
+    <div class="stat-item"><span class="stat-number">9</span><span class="stat-label">Nota TFG<br>rehabilitación</span></div>
+  </div>
+
+  <div class="section-header"><span class="section-title"><span class="section-num">03</span>Competencias</span></div>
+  <div class="skills-row">
+    <div class="skill-cell">
+      <h3>Dirección de ejecución</h3>
+      <ul>
+        <li>Visitas y control de obra</li>
+        <li>Control económico</li>
+        <li>Certificaciones mensuales</li>
+        <li>Precios contradictorios</li>
+        <li>Informes de seguimiento</li>
+        <li>Seguridad y salud</li>
+      </ul>
+    </div>
+    <div class="skill-cell">
+      <h3>Redacción de proyectos</h3>
+      <ul>
+        <li>Mediciones y presupuestos</li>
+        <li>Planes de control de calidad</li>
+        <li>Estudios S+S</li>
+        <li>Gestión de residuos</li>
+        <li>Apoyo en fase de diseño</li>
+        <li>Proyectos modificados</li>
+      </ul>
+    </div>
+    <div class="skill-cell">
+      <h3>Coordinación y transversal</h3>
+      <ul>
+        <li>Coord. facultativa / contratistas</li>
+        <li>Normativa edificación</li>
+        <li>BIM (Revit + Cost-it)</li>
+        <li>Inglés B2 (CertACLES)</li>
+        <li>LEED Green Associate</li>
+        <li>Prevención construcción 60h</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-header"><span class="section-title"><span class="section-num">04</span>Software</span></div>
+  <div class="soft-row">
+    <span class="soft-pill">AutoCAD</span>
+    <span class="soft-pill">Revit</span>
+    <span class="soft-pill">Cost-it (Revit)</span>
+    <span class="soft-pill">Presto</span>
+    <span class="soft-pill">Arquímedes</span>
+    <span class="soft-pill">CCwin</span>
+    <span class="soft-pill">Office 365</span>
+  </div>
+
+  <div class="section-header"><span class="section-title"><span class="section-num">05</span>Experiencia</span></div>
+  <div class="exp-block">
+    <div class="exp-date">Enero 2023<br>— Presente</div>
+    <div>
+      <p class="exp-role">Arquitecto Técnico</p>
+      <p class="exp-company">CPS Infraestructuras, Movilidad y Medio Ambiente, S.L. · Valencia</p>
+      <ul class="exp-list">
+        <li>Evolución desde Becario Estudiante hasta Arquitecto Técnico en plantilla, asumiendo responsabilidades crecientes en dirección de ejecución y proyectos.</li>
+        <li>Dirección de ejecución en obras de pequeña, media y gran escala: visitas, seguimiento, control económico, certificaciones, precios contradictorios, informes mensuales, calidad, S+S.</li>
+        <li>Coordinación con dirección facultativa, contratistas y subcontratistas, garantizando comunicación fluida entre todos los agentes.</li>
+        <li>Elaboración de mediciones, presupuestos, planes de control de calidad, estudios de S+S y gestión de residuos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-header"><span class="section-title"><span class="section-num">06</span>Formación</span></div>
+  <div class="edu-grid">
+    <div class="edu-cell"><span class="edu-year">2018 – 2024</span><p class="edu-title">Grado en Arquitectura Técnica</p><p class="edu-inst">Universitat Politècnica de València</p><p class="edu-note">TFG: Rehabilitación Complejo Policial Zapadores · Nota 9</p></div>
+    <div class="edu-cell"><span class="edu-year">2022</span><p class="edu-title">BIM en Edificación (7.ª Ed.)</p><p class="edu-inst">Universitat Politècnica de València</p></div>
+    <div class="edu-cell"><span class="edu-year">2024</span><p class="edu-title">B2 Inglés — CertACLES</p><p class="edu-inst">Universitat Politècnica de València</p></div>
+    <div class="edu-cell"><span class="edu-year">2024</span><p class="edu-title">Prevención en la Construcción 60h</p><p class="edu-inst">Cualtis</p></div>
+    <div class="edu-cell"><span class="edu-year">2025</span><p class="edu-title">LEED Green Associate</p><p class="edu-inst">Econova Institute</p></div>
+    <div class="edu-cell"><span class="edu-year">2025 – Presente</span><p class="edu-title">Máster en Gestión de Infraestructuras Deportivas y Gestión Deportiva Municipal</p><p class="edu-inst">Grupo Tarraco Formación</p></div>
+  </div>
+
+  <!-- ═══ PORTFOLIO CON FILTROS ═══ -->
+  <div class="section-header"><span class="section-title"><span class="section-num">07</span>Portfolio de proyectos</span></div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Tipología —</span>
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="dotacional">Dotacional</button>
+    <button class="filter-btn" data-filter="seguridad">Seguridad del Estado</button>
+    <button class="filter-btn" data-filter="residencial">Residencial</button>
+    <button class="filter-btn" data-filter="terciario">Terciario / Oficinas</button>
+    <button class="filter-btn" data-filter="educativo">Educativo</button>
+    <button class="filter-btn" data-filter="infraestructura">Infraestructura</button>
+  </div>
+
+  <div class="portfolio-section" id="portfolioSection">
+
+    <!-- ── DOTACIONAL ── -->
+    <div class="tipo-block" data-tipo="dotacional">
+      <div class="tipo-header" onclick="toggleTipo(this)">
+        <span class="tipo-label">— Dotacional público</span>
+        <span class="tipo-count">4 proyectos</span>
+        <span class="tipo-toggle open">+</span>
+      </div>
+      <div class="tipo-body open">
+        <div class="mode-tabs">
+          <button class="mode-tab active" onclick="switchMode(this,'proyectos')">Redacción</button>
+          <button class="mode-tab" onclick="switchMode(this,'deo')">Dir. Ejecución</button>
+        </div>
+        <div class="mode-panel active" data-mode="proyectos">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Proyecto</th><th>Cliente</th><th>PEM</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Rehabilitación integral y aparcamiento, Complejo Policial Zapadores, Valencia</p><p class="proj-funcs">Revisión presupuestaria del proyecto de ejecución</p></td><td class="proj-client">SIEPSE</td><td><span class="proj-pem">20.000.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+              <tr><td><p class="proj-name">Rehabilitación Pabellón 8 y parte Pabellón 7 — Área Médica, Facultad de Óptica, UCM</p><p class="proj-funcs">Presupuestos · S+S · Calidad · Residuos</p></td><td class="proj-client">Universidad Complutense de Madrid</td><td><span class="proj-pem">15.000.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+              <tr><td><p class="proj-name">Reforma integral Aulario y Edificio Pensamiento, Facultad de Estadística, UCM</p><p class="proj-funcs">Presupuestos · S+S · Calidad · Residuos</p></td><td class="proj-client">Universidad Complutense de Madrid</td><td><span class="proj-pem">1.700.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mode-panel" data-mode="deo">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Obra</th><th>Cliente / Proyectista</th><th>PEC</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Rehabilitación integral y aparcamiento, Complejo Policial Zapadores, Valencia</p><p class="proj-funcs">DEO + CSS: visitas · control económico · informes · calidad · S+S</p></td><td class="proj-client">SIEPSE</td><td><span class="proj-pem">20.000.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SEGURIDAD DEL ESTADO ── -->
+    <div class="tipo-block" data-tipo="seguridad">
+      <div class="tipo-header" onclick="toggleTipo(this)">
+        <span class="tipo-label">— Seguridad del Estado</span>
+        <span class="tipo-count">4 proyectos</span>
+        <span class="tipo-toggle open">+</span>
+      </div>
+      <div class="tipo-body open">
+        <div class="mode-tabs">
+          <button class="mode-tab active" onclick="switchMode(this,'proyectos')">Redacción</button>
+          <button class="mode-tab" onclick="switchMode(this,'deo')">Dir. Ejecución</button>
+        </div>
+        <div class="mode-panel active" data-mode="proyectos">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Proyecto</th><th>Cliente</th><th>PEM</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Mod. nº1 Comisaría de Policía Nacional, Yecla</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">SIEPSE</td><td><span class="proj-pem">2.800.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+              <tr><td><p class="proj-name">Mod. nº1 Acuartelamiento Guardia Civil, Caudete (Albacete)</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">SIEPSE</td><td><span class="proj-pem">1.600.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mode-panel" data-mode="deo">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Obra</th><th>Cliente / Proyectista</th><th>PEC</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Comisaría de Policía Nacional, Yecla</p><p class="proj-funcs">DEO + CSS: visitas · control económico · informes · calidad · S+S</p></td><td class="proj-client">SIEPSE</td><td><span class="proj-pem">2.800.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+              <tr><td><p class="proj-name">Acuartelamiento Guardia Civil, Caudete (Albacete)</p><p class="proj-funcs">DEO + CSS: visitas · control económico · informes · calidad · S+S</p></td><td class="proj-client">SIEPSE</td><td><span class="proj-pem">1.600.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RESIDENCIAL ── -->
+    <div class="tipo-block" data-tipo="residencial">
+      <div class="tipo-header" onclick="toggleTipo(this)">
+        <span class="tipo-label">— Residencial</span>
+        <span class="tipo-count">5 proyectos</span>
+        <span class="tipo-toggle open">+</span>
+      </div>
+      <div class="tipo-body open">
+        <div class="mode-tabs">
+          <button class="mode-tab active" onclick="switchMode(this,'proyectos')">Redacción</button>
+          <button class="mode-tab" onclick="switchMode(this,'deo')">Dir. Ejecución</button>
+        </div>
+        <div class="mode-panel active" data-mode="proyectos">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Proyecto</th><th>Cliente</th><th>PEM</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Reforma de edificio para residencia de estudiantes, C/Almácera 12-14, Valencia</p><p class="proj-funcs">Presupuestos · S+S · Calidad · Residuos</p></td><td class="proj-client">Geometrical Ploters, S.L.</td><td><span class="proj-pem">1.200.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+              <tr><td><p class="proj-name">Residencia para personas mayores dependientes, Albal</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">Bonhomia Residencial, S.L.</td><td><span class="proj-pem">1.500.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mode-panel" data-mode="deo">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Obra</th><th>Cliente / Proyectista</th><th>PEC</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Residencia para personas mayores, 120 plazas, Cullera</p><p class="proj-funcs">DEO + CSS: visitas · control económico · informes · calidad · S+S</p></td><td class="proj-client">Pleasand Cullera / UTE CPS + Inma Bordera</td><td><span class="proj-pem">5.000.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+              <tr><td><p class="proj-name">Residencia para personas mayores, 120 plazas, La Vall d'Uixó</p><p class="proj-funcs">DEO + CSS: visitas · control económico · informes · calidad · S+S</p></td><td class="proj-client">Etervi Residencial / CPS</td><td><span class="proj-pem">5.000.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TERCIARIO / OFICINAS ── -->
+    <div class="tipo-block" data-tipo="terciario">
+      <div class="tipo-header" onclick="toggleTipo(this)">
+        <span class="tipo-label">— Terciario / Oficinas</span>
+        <span class="tipo-count">4 proyectos</span>
+        <span class="tipo-toggle open">+</span>
+      </div>
+      <div class="tipo-body open">
+        <div class="mode-tabs">
+          <button class="mode-tab active" onclick="switchMode(this,'proyectos')">Redacción</button>
+          <button class="mode-tab" onclick="switchMode(this,'deo')">Dir. Ejecución</button>
+        </div>
+        <div class="mode-panel active" data-mode="proyectos">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Proyecto</th><th>Cliente</th><th>PEM</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">—</p><p class="proj-funcs">Sin proyectos de redacción en esta tipología</p></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mode-panel" data-mode="deo">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Obra</th><th>Cliente / Proyectista</th><th>PEC</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Oficinas y locales comerciales — Edificio A-02, Marina Port Valencia</p><p class="proj-funcs">DEO: visitas · control económico · informes · calidad</p></td><td class="proj-client">Marina Port Valencia / ERRE Arquitectura</td><td><span class="proj-pem">22.000.000 €</span></td><td><span class="proj-year">2026</span></td></tr>
+              <tr><td><p class="proj-name">Reforma edificio existente — Edificio E-17, Marina Port Valencia</p><p class="proj-funcs">DEO: visitas · control económico · informes · calidad</p></td><td class="proj-client">Marina Port Valencia / ERRE Arquitectura</td><td><span class="proj-pem">1.200.000 €</span></td><td><span class="proj-year">2025</span></td></tr>
+              <tr><td><p class="proj-name">Reforma de restaurante con afección estructural — Edificio E-03, Marina Port Valencia</p><p class="proj-funcs">DEO: visitas · control económico · informes · calidad</p></td><td class="proj-client">Marina Port Valencia / ERRE Arquitectura</td><td><span class="proj-pem">2.000.000 €</span></td><td><span class="proj-year">2025</span></td></tr>
+              <tr><td><p class="proj-name">Módulo marinería, acceso, aseos y control — Marina Port Valencia</p><p class="proj-funcs">DEO: visitas · control económico · informes · calidad</p></td><td class="proj-client">Marina Port Valencia / ERRE Arquitectura</td><td><span class="proj-pem">800.000 €</span></td><td><span class="proj-year">2025</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EDUCATIVO ── -->
+    <div class="tipo-block" data-tipo="educativo">
+      <div class="tipo-header" onclick="toggleTipo(this)">
+        <span class="tipo-label">— Educativo</span>
+        <span class="tipo-count">4 proyectos</span>
+        <span class="tipo-toggle open">+</span>
+      </div>
+      <div class="tipo-body open">
+        <div class="mode-tabs">
+          <button class="mode-tab active" onclick="switchMode(this,'proyectos')">Redacción</button>
+          <button class="mode-tab" onclick="switchMode(this,'deo')">Dir. Ejecución</button>
+        </div>
+        <div class="mode-panel active" data-mode="proyectos">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Proyecto</th><th>Cliente</th><th>PEM</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Finalización obras CEIP "Joanot Martorell", Xeraco</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">Ayuntamiento de Xeraco</td><td><span class="proj-pem">4.300.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+              <tr><td><p class="proj-name">Mod. nº1 Plan Edificant — IES Porçons, Aielo de Malferit</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">Ayuntamiento de Aielo de Malferit</td><td><span class="proj-pem">720.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+              <tr><td><p class="proj-name">Mod. nº1 CEEP Alberto Tortajada, Algemesí</p><p class="proj-funcs">Presupuestos · Residuos</p></td><td class="proj-client">Ayuntamiento de Algemesí</td><td><span class="proj-pem">4.400.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mode-panel" data-mode="deo">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Obra</th><th>Cliente / Proyectista</th><th>PEC</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Nuevo CEEP Alberto Tortajada, Algemesí</p><p class="proj-funcs">DEO + CSS: visitas · control económico · informes · calidad · S+S</p></td><td class="proj-client">Ayuntamiento de Algemesí / UTE CPS + Pepe Font Arquitectos</td><td><span class="proj-pem">4.500.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INFRAESTRUCTURA ── -->
+    <div class="tipo-block" data-tipo="infraestructura">
+      <div class="tipo-header" onclick="toggleTipo(this)">
+        <span class="tipo-label">— Infraestructura / Demolición</span>
+        <span class="tipo-count">3 proyectos</span>
+        <span class="tipo-toggle open">+</span>
+      </div>
+      <div class="tipo-body open">
+        <div class="mode-tabs">
+          <button class="mode-tab active" onclick="switchMode(this,'proyectos')">Redacción</button>
+          <button class="mode-tab" onclick="switchMode(this,'deo')">Dir. Ejecución</button>
+        </div>
+        <div class="mode-panel active" data-mode="proyectos">
+          <table class="portfolio-table">
+            <thead><tr><th style="width:46%">Proyecto</th><th>Cliente</th><th>PEM</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td><p class="proj-name">Demolición de 6 grupos de edificaciones, Alboraia</p><p class="proj-funcs">Presupuestos · S+S · Calidad · Residuos</p></td><td class="proj-client">Turiaber 2021, S.L.</td><td><span class="proj-pem">350.000 €</span></td><td><span class="proj-year">2024</span></td></tr>
+              <tr><td><p class="proj-name">Inspección 12 estaciones ITV</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">SITVAL</td><td><span class="proj-pem">1.000.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+              <tr><td><p class="proj-name">Inspección técnica edificios FGV, Alicante</p><p class="proj-funcs">Presupuestos</p></td><td class="proj-client">Ferrocarrils de la Generalitat Valenciana</td><td><span class="proj-pem">1.500.000 €</span></td><td><span class="proj-year">2023</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mode-panel" data-mode="deo">
+          <table class="portfolio-table">
+            <thead><tr><th>Obra</th><th>Cliente</th><th>PEC</th><th>Año</th></tr></thead>
+            <tbody>
+              <tr><td colspan="4"><p class="proj-funcs" style="padding:14px 0;">Sin obras de dirección de ejecución en esta tipología</p></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /portfolioSection -->
+
+  <footer>
+    <span class="footer-name">Álvaro Lillo Cócera</span>
+    <div class="footer-contact">
+      <p>+34 605 145 265</p>
+      <p>a.lillococera@gmail.com</p>
+      <p>N.º Colegiado COAT 7.042</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  function toggleTipo(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.tipo-toggle');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    toggle.classList.toggle('open', !isOpen);
+  }
+
+  function switchMode(tab, mode) {
+    const block = tab.closest('.tipo-body');
+    block.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    block.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    block.querySelector('[data-mode="' + mode + '"]').classList.add('active');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.tipo-block').forEach(block => {
+        const tipo = block.dataset.tipo;
+        const show = filter === 'all' || tipo === filter;
+        block.style.display = show ? '' : 'none';
+        if (show) {
+          const body = block.querySelector('.tipo-body');
+          const toggle = block.querySelector('.tipo-toggle');
+          body.classList.add('open');
+          toggle.classList.add('open');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
